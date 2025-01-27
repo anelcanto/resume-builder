@@ -1,21 +1,38 @@
+/* styles/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom styles if needed */
+.resume-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Print Styles */
+@media print {
+  /* Hide all elements */
+  body * {
+    visibility: hidden;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Show only the resume */
+  .printable-resume, .printable-resume * {
+    visibility: visible;
+  }
+
+  /* Position the resume at the top left */
+  .printable-resume {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Hide the Print button and any other elements */
+  .printable-resume ~ div, .printable-resume ~ div * {
+    display: none;
+  }
 }

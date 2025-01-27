@@ -5,6 +5,8 @@
 import React, { useContext } from 'react';
 import { ResumeContext } from '../context/ResumeContext';
 import { ClassicTemplate, ModernTemplate } from './templates';
+import { PrinterIcon } from '@heroicons/react/24/solid';
+
 
 const ResumeDisplay: React.FC = () => {
     const { resumeData } = useContext(ResumeContext);
@@ -25,10 +27,23 @@ const ResumeDisplay: React.FC = () => {
         }
     };
 
+    const handlePrint = () => {
+        window.print();
+    };
+
     return (
         <div className="p-8 bg-gray-100 min-h-screen">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Your Resume</h2>
-            <div className="bg-white p-6 rounded-md shadow-md">
+            <div className="flex justify-end mb-4">
+                <button
+                    onClick={handlePrint}
+                    className="flex items-center bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
+                    aria-label="Print Resume"
+                >
+                    <PrinterIcon className="h-5 w-5 mr-2" />
+                    Print Resume
+                </button>
+            </div>
+            <div className="bg-white p-6 rounded-md shadow-md printable-resume">
                 {renderTemplate()}
             </div>
         </div>
