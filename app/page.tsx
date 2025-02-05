@@ -10,7 +10,7 @@ export default function Home() {
         Create your professional resume by selecting a template and adding your personal and job-related information.
       </p>
       <Link
-        href="/templates"
+        href="/resume"
         className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition"
       >
         Get Started

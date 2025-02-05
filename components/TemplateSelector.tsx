@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { ResumeContext } from '../context/ResumeContext';
 
 interface Template {
@@ -27,7 +27,6 @@ const templates: Template[] = [
 ];
 
 const TemplateSelector: React.FC = () => {
-    const router = useRouter();
     const { setResumeData } = useContext(ResumeContext);
 
     const handleSelect = (templateId: string) => {
@@ -35,7 +34,8 @@ const TemplateSelector: React.FC = () => {
             ...prev,
             selectedTemplate: templateId,
         }));
-        router.push('/profile');
+        // Removed navigation so the preview panel can update immediately
+        // router.push('/profile');
     };
 
     return (
@@ -48,7 +48,13 @@ const TemplateSelector: React.FC = () => {
                         className="border rounded-md p-4 cursor-pointer hover:shadow-lg transition"
                         onClick={() => handleSelect(template.id)}
                     >
-                        <img src={template.preview} alt={`${template.name} Preview`} className="w-full h-40 object-cover mb-4 rounded" />
+                        <Image
+                            src={template.preview}
+                            alt={`${template.name} Preview`}
+                            width={400}
+                            height={160}
+                            className="w-full h-40 object-cover mb-4 rounded"
+                        />
                         <h3 className="text-xl font-medium">{template.name}</h3>
                     </div>
                 ))}

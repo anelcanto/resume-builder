@@ -4,12 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles if needed */
-.resume-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
 /* Print Styles */
 @media print {
@@ -18,21 +12,6 @@
     visibility: hidden;
   }
 
-  /* Show only the resume */
-  .printable-resume, .printable-resume * {
-    visibility: visible;
-  }
 
-  /* Position the resume at the top left */
-  .printable-resume {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
 
-  /* Hide the Print button and any other elements */
-  .printable-resume ~ div, .printable-resume ~ div * {
-    display: none;
-  }
 }

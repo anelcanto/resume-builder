@@ -47,10 +47,6 @@
         {
             "technology": "Docker",
             "is_relevant": false
-        },
-        {
-            "technology": "Kubernetes",
-            "is_relevant": false
         }
     ],
     "work_experience": [

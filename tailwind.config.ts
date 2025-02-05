@@ -12,6 +12,21 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      width: {
+        'a4-width': '794px',
+      },
+      height: {
+        'a4-height': '1123px',
+      },
+      maxWidth: {
+        'a4-width': '794px',
+      },
+      maxHeight: {
+        'a4-height': '1123px',
+      },
+      boxShadow: {
+        'a4': '0 0 10px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [],
