@@ -18,9 +18,9 @@ export default function RootLayout({
           <nav className="bg-gray-800 text-white p-4">
             <div className="container mx-auto flex space-x-4">
               <Link href="/" className="hover:text-gray-400">Home</Link>
-              <Link href="/templates" className="hover:text-gray-400">Select Template</Link>
-              <Link href="/profile" className="hover:text-gray-400">Personal Profile</Link>
-              <Link href="/job" className="hover:text-gray-400">Job Listing</Link>
+              {/* <Link href="/templates" className="hover:text-gray-400">Select Template</Link> */}
+              {/* <Link href="/profile" className="hover:text-gray-400">Personal Profile</Link> */}
+              {/* <Link href="/job" className="hover:text-gray-400">Job Listing</Link> */}
               <Link href="/resume" className="hover:text-gray-400">View Resume</Link>
             </div>
           </nav>

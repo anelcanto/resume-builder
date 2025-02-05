@@ -3,13 +3,19 @@
 'use client';
 
 import React, { useContext } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { ResumeContext } from '../context/ResumeContext';
+import Select from 'react-select';
+
+interface Option {
+    value: string;
+    label: string;
+}
 
 interface Template {
     id: string;
     name: string;
-    preview: string; // URL to a preview image
+    preview?: string; // URL to a preview image
 }
 
 const templates: Template[] = [
@@ -34,15 +40,25 @@ const TemplateSelector: React.FC = () => {
             ...prev,
             selectedTemplate: templateId,
         }));
-        // Removed navigation so the preview panel can update immediately
-        // router.push('/profile');
     };
 
     return (
-        <div className="p-8">
-            <h2 className="text-2xl font-semibold mb-6">Select a Resume Template</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {templates.map((template) => (
+        <>
+            <h2 className="text-2xl font-semibold mb-6">
+                Select a Resume Template
+            </h2>
+
+            <Select<Option>
+                options={templates.map(template => ({ value: template.id, label: template.name }))}
+                onChange={(option) => option && handleSelect(option.value)}
+                placeholder="Select a template"
+            ></Select>
+
+
+
+            {/*    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+             {templates.map((template) => (
                     <div
                         key={template.id}
                         className="border rounded-md p-4 cursor-pointer hover:shadow-lg transition"
@@ -57,10 +73,11 @@ const TemplateSelector: React.FC = () => {
                         />
                         <h3 className="text-xl font-medium">{template.name}</h3>
                     </div>
-                ))}
-            </div>
-        </div>
+                ))} 
+            </div>*/}
+        </>
     );
 };
+
 
 export default TemplateSelector;
