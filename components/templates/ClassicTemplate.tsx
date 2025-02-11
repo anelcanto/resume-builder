@@ -48,13 +48,13 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
             <p className="text-sm text-gray-600">
               {job.company_name} | {job.start_year} - {job.end_year}
             </p>
-            <ul className="list-disc list-inside mt-2">
+            <ul className="list-disc list-inside mt-2 ml-5">
               {job.bullet_points.map((point: string, idx: number) => (
                 <li key={idx}>{point}</li>
               ))}
             </ul>
             <p className="text-sm text-gray-600 mt-2">
-              <strong>Stack:</strong>{' '}
+              <strong className='ml-5'>Stack:</strong>{' '}
               {job.stack.map((tech, idx) => (
                 <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
                   {tech.technology}
@@ -71,7 +71,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         <h2 className="text-l uppercase font-semibold">Education and Certifications</h2>
         <hr className="mb-2" />
         {data.education_certifications.education.map((edu, index) => (
-          <div key={index} className="mb-4">
+          <div key={index} className="mb-2">
             <p>
               <strong>{edu.degree}</strong> - {edu.school_name}
             </p>
@@ -84,7 +84,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         {data.education_certifications.certifications &&
           data.education_certifications.certifications.map((cert, index) => (
             <div key={index} className="">
-              <p>
+              <p className='ml-5'>
                 {cert.certification_name} - {cert.issuing_organization}
               </p>
             </div>
