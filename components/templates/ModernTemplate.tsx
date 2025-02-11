@@ -1,54 +1,50 @@
 // components/templates/ModernTemplate.tsx
 
 import React from 'react';
-import { ResumeData } from '../../types/resume';
+import SkillsTable, { Skill } from '../SkillsTable';
+import { ResumeData } from '@/types/resume';
 
 interface ModernTemplateProps {
   data: ResumeData;
 }
 
+// Utility function to simplify the URL
+const simplifyUrl = (url: string) => {
+  return url.replace(/^https?:\/\//, '').replace(/^www\./, '');
+};
+
 const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
+  const skills: Skill[] = (data.skills || []).map((skill) =>
+    typeof skill === 'string' ? { technology: skill, is_relevant: true } : (skill as Skill)
+  );
   return (
     <>
       {/* // The container class here enforces a consistent max-width (if you have container sizes defined)
       // You can adjust the container’s max-width in your Tailwind config or add a specific max-w-* class. */}
       {/* Header Section */}
-      < header className="w-full flex items-center justify-between mb-6 print:visible" >
+      < header className="w-full flex items-center justify-between print:visible" >
         <div className="w-1/2 flex-shrink-0">
-          <h1 className="text-3xl font-bold">{data.candidate_name}</h1>
-          <p className="text-sm text-gray-600">{data.candidate_title}</p>
+          <h1 className="text-4xl font-bold">{data.candidate_name}</h1>
+          <p className="text-md font-semibold text-gray-600">{data.candidate_title}</p>
         </div>
         <div className="w-1/2 flex-shrink-0 text-right">
+          {data.linkedin && (
+            <a href={data.linkedin} className="text-blue-500 underline">
+              {simplifyUrl(data.linkedin)}
+            </a>
+          )}
           <p className="text-sm text-gray-600">{data.email}</p>
           <p className="text-sm text-gray-600">{data.phone}</p>
           <p className="text-sm text-gray-600">{data.location}</p>
-          <a href={data.linkedin} className="text-blue-500 underline text-sm">
-            LinkedIn
-          </a>
         </div>
       </header >
 
       {/* Skills and Job Listing */}
-      < div className="flex flex-col md:flex-row mb-6 print:visible" >
-        <section className="md:w-1/2 mb-4 md:mb-0">
-          <h2 className="text-xl font-semibold mb-2">Skills</h2>
-          <ul className="list-disc list-inside">
-            {data.skills.map((skill, index) => (
-              <li key={index} className={skill.is_relevant ? 'font-bold' : ''}>
-                {skill.technology}
-              </li>
-            ))}
-          </ul>
+      <div className="flex w-full print:visible">
+        <section className="mb-3 print:visible w-full">
+          <SkillsTable skills={skills} bulletType="solid" />
         </section>
-        <section className="md:w-1/2">
-          <h2 className="text-xl font-semibold mb-2">Job Applying For</h2>
-          <p className="font-semibold">{data.job_listing?.job_title}</p>
-          <p className="text-sm text-gray-600">{data.job_listing?.company_name}</p>
-          <p className="text-sm text-gray-600 mt-2">
-            {data.job_listing?.job_description}
-          </p>
-        </section>
-      </div >
+      </div>
 
       {/* Work Experience */}
       < section className="mb-6 print:visible" >

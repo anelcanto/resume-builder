@@ -51,4 +51,6 @@ export interface ResumeData {
     skills: Skill[];
     work_experience: WorkExperience[];
     education_certifications: EducationCertifications;
+    candidate_image?: string;
+    candidate_image_size?: number;
 }

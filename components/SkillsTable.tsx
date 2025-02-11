@@ -1,49 +1,45 @@
-// /Users/anelcanto/Dev/resume-builder/components/SkillsTable.tsx
+// components/SkillsTable.tsx
 
 import React from 'react';
-import { ResumeData } from '../types/resume';
 
-type BulletType = 'none' | 'solid' | 'hollow' | 'custom';
+// Define the bullet types, adjust as needed
+export type BulletType = 'none' | 'solid' | 'dashed';
+
+// Define the Skill interface
+export interface Skill {
+    technology: string;
+    is_relevant: boolean;
+}
 
 interface SkillsTableProps {
-    skills: ResumeData['skills'];
+    skills: Skill[];
     bulletType?: BulletType;
 }
 
 const SkillsTable: React.FC<SkillsTableProps> = ({ skills, bulletType = 'solid' }) => {
-    // Divide skills into three columns
-    const columns: ResumeData['skills'][] = [[], [], []];
+    // Divide skills into 3 columns for layout
+    const columns: Skill[][] = [[], [], []];
     skills.forEach((skill, index) => {
         columns[index % 3].push(skill);
     });
 
-    // Function to get bullet style based on bulletType
-    const getBulletStyle = (type: BulletType) => {
-        switch (type) {
-            case 'solid':
-                return '•'; // Black solid bullet
-            case 'hollow':
-                return '○'; // Hollow bullet
-            case 'custom':
-                return '★'; // Example of a custom bullet
-            case 'none':
-            default:
-                return ''; // No bullet
-        }
+    // Helper function for bullet styling
+    const getBullet = () => {
+        if (bulletType === 'solid') return '•';
+        if (bulletType === 'dashed') return '-';
+        return '';
     };
 
     return (
-        <div className="skills-table grid grid-cols-3 gap-4">
-            {columns.map((columnSkills, colIndex) => (
-                <ul key={colIndex} className="list-none">
-                    {columnSkills.map((skill, index) => (
-                        <li key={index} className="flex items-start mb-1/2 text-sm">
+        <div className="flex w-full ml-5">
+            {columns.map((col, colIndex) => (
+                <ul key={colIndex} className="list-none flex-1">
+                    {col.map((skill, index) => (
+                        <li key={index} className={`mb-1 text-xs ${skill.is_relevant ? 'font-bold' : ''}`}>
                             {bulletType !== 'none' && (
-                                <span className="mr-2 " style={{ width: '1em', display: 'inline-block' }}>
-                                    {getBulletStyle(bulletType)}
-                                </span>
+                                <span className="mr-2">{getBullet()}</span>
                             )}
-                            <span className={'' + skill.is_relevant ? 'font-bold' : ''}>{skill.technology}</span>
+                            {skill.technology}
                         </li>
                     ))}
                 </ul>

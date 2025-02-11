@@ -4,7 +4,7 @@
 
 import React, { useContext } from 'react';
 import { ResumeContext } from '../context/ResumeContext';
-import { ClassicTemplate, ModernTemplate } from './templates';
+import { ClassicTemplate, ModernTemplate, CustomTemplate } from './templates';
 import { PrinterIcon } from '@heroicons/react/24/solid';
 import SidebarPanel from './SidebarPanel';
 
@@ -17,7 +17,8 @@ const ResumeDisplay: React.FC = () => {
                 return <ModernTemplate data={resumeData} />;
             case 'classic':
                 return <ClassicTemplate data={resumeData} />;
-            // Add more cases for additional templates
+            case 'custom':
+                return <CustomTemplate data={resumeData} />;
             default:
                 return <p>Template not found.</p>;
         }
@@ -50,7 +51,7 @@ const ResumeDisplay: React.FC = () => {
                         </button>
                     </div>
                     <div className="bg-white p-6 rounded-md print:visible print:[&_*]:visible max-w-[8.5in] w-full">
-                        <div className="w-full print:absolute print:left-0 print:top-0 print:w-full">
+                        <div className="w-full print:absolute print:left-0 print:top-0 print:w-full p-[.1in]">
                             {resumeData.selectedTemplate ? (
                                 renderTemplate()
                             ) : (

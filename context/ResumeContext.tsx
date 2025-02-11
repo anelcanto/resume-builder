@@ -23,6 +23,8 @@ const defaultResumeData: ResumeData = {
         education: [],
         certifications: [],
     },
+    selectedTemplate: '', // <-- Added property here
+    candidate_image: '',  // <-- If needed
 };
 
 export const ResumeContext = createContext<ResumeContextProps>({

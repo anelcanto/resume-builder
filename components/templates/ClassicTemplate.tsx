@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData } from '../../types/resume';
-import SkillsTable from '../SkillsTable';
+import SkillsTable, { Skill } from '../SkillsTable';
 
 interface ClassicTemplateProps {
   data: ResumeData;
@@ -12,6 +12,10 @@ const simplifyUrl = (url: string) => {
 };
 
 const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
+  const skills: Skill[] = (data.skills || []).map((skill) =>
+    typeof skill === 'string' ? { technology: skill, is_relevant: true } : (skill as Skill)
+  );
+
   return (
     <>
       {/* Header Section */}
@@ -19,9 +23,11 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
         <h1 className="text-3xl font-bold">{data.candidate_name}</h1>
         <p className="text-md text-gray-600">
           {data.email} &middot; {data.phone} &middot; {data.location} &middot;{' '}
-          <a href={data.linkedin} className="text-blue-500 underline">
-            {simplifyUrl(data.linkedin)}
-          </a>
+          {data.linkedin && (
+            <a href={data.linkedin} className="text-blue-500 underline">
+              {simplifyUrl(data.linkedin)}
+            </a>
+          )}
         </p>
       </header>
 
@@ -29,7 +35,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
       <section className="mb-3 print:visible">
         <h2 className="text-l uppercase font-semibold">Skills</h2>
         <hr className="mb-2" />
-        <SkillsTable skills={data.skills} bulletType="solid" />
+        <SkillsTable skills={skills} bulletType="solid" />
       </section>
 
       {/* Work Experience */}
@@ -43,7 +49,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
               {job.company_name} | {job.start_year} - {job.end_year}
             </p>
             <ul className="list-disc list-inside mt-2">
-              {job.bullet_points.map((point, idx) => (
+              {job.bullet_points.map((point: string, idx: number) => (
                 <li key={idx}>{point}</li>
               ))}
             </ul>
