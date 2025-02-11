@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResumeData } from '../../types/resume';
 import SkillsTable, { Skill } from '../SkillsTable';
+import ReactMarkDown from 'react-markdown';
 
 interface ClassicTemplateProps {
   data: ResumeData;
@@ -50,7 +51,17 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
             </p>
             <ul className="list-disc list-inside mt-2 ml-5">
               {job.bullet_points.map((point: string, idx: number) => (
-                <li key={idx}>{point}</li>
+                <li key={idx}>
+                  <ReactMarkDown
+                    components={{
+                      // Render paragraphs as a span to avoid extra margins
+                      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                      p: ({ node, ...props }) => <span {...props} />
+                    }}
+                  >
+                    {point}
+                  </ReactMarkDown>
+                </li>
               ))}
             </ul>
             <p className="text-sm text-gray-600 mt-2">

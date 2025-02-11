@@ -3,6 +3,7 @@
 import React from 'react';
 import SkillsTable, { Skill } from '../SkillsTable';
 import { ResumeData } from '@/types/resume';
+import ReactMarkDown from 'react-markdown';
 
 interface ModernTemplateProps {
   data: ResumeData;
@@ -59,7 +60,17 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             </p>
             <ul className="list-disc list-inside mt-2 ml-5">
               {job.bullet_points.map((point, idx) => (
-                <li key={idx}>{point}</li>
+                <li key={idx}>
+                  <ReactMarkDown
+                    components={{
+                      // Render paragraphs as a span to avoid extra margins
+                      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                      p: ({ node, ...props }) => <span {...props} />
+                    }}
+                  >
+                    {point}
+                  </ReactMarkDown>
+                </li>
               ))}
             </ul>
             <p className="text-sm text-gray-600 mt-1 ml-5">

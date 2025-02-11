@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ResumeData } from '../../types/resume';
 import SkillsTable from '../SkillsTable';
+import ReactMarkdown from 'react-markdown';
 
 interface CustomTemplateProps {
     data: ResumeData;
@@ -63,7 +64,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ data }) => {
                     <section className="mb-4">
                         <h3 className="font-bold uppercase text-base">Work Experience</h3>
                         {data.work_experience.map((job, index) => (
-                            <div key={index} className="mb-2">
+                            <div key={index} className="mb-1">
                                 <span className="font-medium text-lg">
                                     {job.job_title} at {job.company_name}
                                 </span>
@@ -73,12 +74,22 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ data }) => {
                                 {job.bullet_points && (
                                     <ul className="list-disc list-inside">
                                         {job.bullet_points.map((point, idx) => (
-                                            <li key={idx} className="ml-5">{point}</li>
+                                            <li key={idx} className="ml-5">
+                                                <ReactMarkdown
+                                                    components={{
+                                                        // Render paragraphs as a span to avoid extra margins
+                                                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                        p: ({ node, ...props }) => <span {...props} />
+                                                    }}
+                                                >
+                                                    {point}
+                                                </ReactMarkdown>
+                                            </li>
                                         ))}
                                     </ul>
                                 )}
                                 {job.stack && job.stack.length > 0 && (
-                                    <p className="mt-2 text-[14px]">
+                                    <p className=" text-[14px]">
                                         <strong className='ml-5'>Stack:</strong>{' '}
                                         {job.stack.map((tech, idx) => (
                                             <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
