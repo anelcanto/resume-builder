@@ -53,4 +53,5 @@ export interface ResumeData {
     education_certifications: EducationCertifications;
     candidate_image?: string;
     candidate_image_size?: number;
+    resumeMargin?: number;
 }
