@@ -40,7 +40,8 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
       </header >
 
       {/* Skills and Job Listing */}
-      <div className="flex w-full print:visible">
+      {/* <h2 className="text-lg uppercase font-semibold ">Skills</h2> */}
+      <div className="flex w-full print:visible mt-1">
         <section className="mb-3 print:visible w-full">
           <SkillsTable skills={skills} bulletType="solid" />
         </section>
@@ -48,36 +49,38 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
 
       {/* Work Experience */}
       < section className="mb-6 print:visible" >
-        <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
-        {
-          data.work_experience.map((job, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="font-semibold">{job.job_title}</h3>
-              <p className="text-sm text-gray-600">
-                {job.company_name} | {job.start_year} - {job.end_year}
-              </p>
-              <ul className="list-disc list-inside mt-2">
-                {job.bullet_points.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-              <p className="text-sm text-gray-600 mt-2">
-                <strong>Stack:</strong>{' '}
-                {job.stack.map((tech, idx) => (
-                  <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
-                    {tech.technology}
-                    {idx < job.stack.length - 1 && ', '}
-                  </span>
-                ))}
-              </p>
-            </div>
-          ))
+        {/* <h2 className="text-lg uppercase font-semibold">Work Experience</h2> */}
+        <hr className="mb-2" />
+        {data.work_experience.map((job, index) => (
+          <div key={index} className="mb-2">
+            <h3 className="font-semibold">{job.job_title}</h3>
+            <p className="text-sm text-gray-600">
+              {job.company_name} | {job.start_year} - {job.end_year}
+            </p>
+            <ul className="list-disc list-inside mt-2 ml-5">
+              {job.bullet_points.map((point, idx) => (
+                <li key={idx}>{point}</li>
+              ))}
+            </ul>
+            <p className="text-sm text-gray-600 mt-1 ml-5">
+              <strong>Stack:</strong>{' '}
+              {job.stack.map((tech, idx) => (
+                <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
+                  {tech.technology}
+                  {idx < job.stack.length - 1 && ', '}
+                </span>
+              ))}
+            </p>
+          </div>
+        ))
         }
       </section >
 
+      <hr className="mb-2" />
+
       {/* Education and Certifications */}
-      < section className="mb-6 print:visible" >
-        <h2 className="text-xl font-semibold mb-2">Education and Certifications</h2>
+      < section className=" print:visible" >
+        {/* <h2 className="text-xl font-semibold mb-2">Education and Certifications</h2> */}
         {
           data.education_certifications.education.map((edu, index) => (
             <div key={index} className="mb-4">
@@ -85,7 +88,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
                 <strong>{edu.degree}</strong> - {edu.school_name}
               </p>
               {edu.notable_achievements && (
-                <ul className="list-disc list-inside mt-2">
+                <ul className=" list-inside ml-5">
                   {edu.notable_achievements.map((achievement, idx) => (
                     <li key={idx}>{achievement}</li>
                   ))}
@@ -95,8 +98,8 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           ))
         }
         <div>
-          <strong>Certifications:</strong>
-          <ul className="list-disc list-inside mt-2">
+          {/* <strong>Certifications:</strong> */}
+          <ul className=" list-inside mt-1 ml-5">
             {data.education_certifications.certifications.map((cert, index) => (
               <li key={index}>
                 {cert.certification_name} - {cert.issuing_organization}
