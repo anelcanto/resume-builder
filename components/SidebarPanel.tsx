@@ -134,7 +134,7 @@ const SidebarPanel: React.FC = () => {
             </section>
 
             {/* Conditionally Render Profile Picture & Slider Section */}
-            {templatesWithPicture.includes(resumeData.selectedTemplate) && (
+            {templatesWithPicture.includes(resumeData.selectedTemplate ?? '') && (
                 <section className="bg-white p-4 rounded-md shadow">
                     <h2 className="text-xl font-semibold mb-4">Profile Picture</h2>
                     <div className="flex items-center">
