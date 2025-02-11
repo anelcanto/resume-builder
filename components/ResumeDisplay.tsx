@@ -40,7 +40,8 @@ const ResumeDisplay: React.FC = () => {
             {/* <div className="mx-auto p-4 col-span-3 flex justify-center"> */}
             <div className="col-span-3 place-self-center">
                 <div className="bg-gray-100 min-h-screen w-[calc(8.5in)] print:w-full print:m-0 grid">
-                    <div className="flex justify-end mb-4 print:hidden">
+                    {/* Print button */}
+                    <div className="flex justify-end mb-4 print:hidden ">
                         <button
                             onClick={handlePrint}
                             className="fixed bottom-8 mr-2  flex items-center bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
@@ -51,7 +52,10 @@ const ResumeDisplay: React.FC = () => {
                         </button>
                     </div>
                     <div className="bg-white p-6 rounded-md print:visible print:[&_*]:visible max-w-[8.5in] w-full">
-                        <div className="w-full print:absolute print:left-0 print:top-0 print:w-full p-[.1in]">
+                        <div
+                            className="w-full print:absolute print:left-0 print:top-0 print:w-full"
+                            style={{ padding: `${resumeData.resumeMargin || 0.1}in` }}
+                        >
                             {resumeData.selectedTemplate ? (
                                 renderTemplate()
                             ) : (

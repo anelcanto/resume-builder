@@ -186,6 +186,42 @@ const SidebarPanel: React.FC = () => {
                 </section>
             )}
 
+            {/* Resume Margin Control Section */}
+            <section className="bg-white p-4 rounded-md shadow">
+                <h2 className="text-xl font-semibold mb-4">Resume Margin (in inches)</h2>
+                <div className="flex items-center">
+                    <input
+                        id="resume-margin-slider"
+                        type="range"
+                        min="0.1"
+                        max="0.5"
+                        step="0.01"
+                        value={resumeData.resumeMargin || 0.1}
+                        onChange={(e) =>
+                            setResumeData({
+                                ...resumeData,
+                                resumeMargin: parseFloat(e.target.value),
+                            })
+                        }
+                        className="w-full"
+                    />
+                    <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        max="0.5"
+                        value={resumeData.resumeMargin || 0.0}
+                        onChange={(e) =>
+                            setResumeData({
+                                ...resumeData,
+                                resumeMargin: parseFloat(e.target.value),
+                            })
+                        }
+                        className="w-16 ml-4 border border-gray-300 rounded-md p-1"
+                    />
+                </div>
+            </section>
+
             {/* Template Selector Section */}
             <section className="bg-white p-4 rounded-md shadow">
                 <TemplateSelector />

@@ -18,7 +18,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ data }) => {
             {/* Header with candidate info on the left and candidate image (logo) on the right */}
             <header className="flex justify-between items-start">
                 <div className="flex flex-col">
-                    <h1 className="text-[36px] font-bold text-left">
+                    <h1 className="text-[36px] font-bold text-left -my-[8px]">
                         {data.candidate_name}
                     </h1>
                     {data.candidate_title && (

@@ -83,7 +83,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
         {/* <h2 className="text-xl font-semibold mb-2">Education and Certifications</h2> */}
         {
           data.education_certifications.education.map((edu, index) => (
-            <div key={index} className="mb-4">
+            <div key={index} className="mb-2">
               <p>
                 <strong>{edu.degree}</strong> - {edu.school_name}
               </p>
