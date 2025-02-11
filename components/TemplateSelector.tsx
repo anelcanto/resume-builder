@@ -5,6 +5,8 @@
 import React, { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { ResumeContext } from '../context/ResumeContext';
+import { SingleValue } from 'react-select';
+
 
 // Dynamically import react-select with SSR disabled.
 const DynamicSelect = dynamic(() => import('react-select'), { ssr: false });
@@ -13,6 +15,11 @@ interface Template {
     id: string;
     name: string;
     preview?: string; // URL to a preview image
+}
+
+interface OptionType {
+    value: string;
+    label: string;
 }
 
 const templates: Template[] = [
@@ -48,17 +55,19 @@ const TemplateSelector: React.FC = () => {
         <>
             <h2 className="text-2xl font-semibold mb-6">Select a Resume Template</h2>
             <DynamicSelect
+                defaultValue={{ value: 'classic', label: 'Classic' }}
                 options={templates.map((template) => ({
                     value: template.id,
                     label: template.name,
                 }))}
-                //eslint-disable-next-line
-                onChange={(newValue: any) => newValue && handleSelect(newValue.value)}
+                onChange={(newValue) => {
+                    const selectedOption = newValue as SingleValue<OptionType>;
+                    if (selectedOption) {
+                        handleSelect(selectedOption.value);
+                    }
+                }}
                 placeholder="Select a template"
             />
-            {/* 
-      You can also use your grid of template cards here if you prefer.
-      */}
         </>
     );
 };

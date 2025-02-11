@@ -92,12 +92,14 @@ const SidebarPanel: React.FC = () => {
         });
     };
 
+    // Define the templates that accept a profile picture.
+    const templatesWithPicture = ['custom'];
+
     return (
         <div className="flex flex-col gap-4">
             {/* JSON Input Section */}
             <section className="bg-white p-4 rounded-md shadow">
-                <h2 className="text-2xl font-semibold mb-4">Paste JSON Job</h2>
-
+                <h2 className="text-2xl font-semibold mb-4">Paste Job JSON Data</h2>
                 <div className="mb-4 text-center">
                     <a
                         href="https://chatgpt.com/g/g-67a3dfc519888191966a72e6d8e35b62-resume-builder-dwd"
@@ -108,7 +110,6 @@ const SidebarPanel: React.FC = () => {
                         Click here to obtain your JSON from a GPT
                     </a>
                 </div>
-
                 <textarea
                     id="json-input"
                     name="json-input"
@@ -132,56 +133,58 @@ const SidebarPanel: React.FC = () => {
                 </div>
             </section>
 
-            {/* Profile Picture & Slider Section */}
-            <section className="bg-white p-4 rounded-md shadow">
-                <h2 className="text-xl font-semibold mb-4">Profile Picture</h2>
-                <div className="flex items-center">
-                    <div className="w-full">
-                        <label htmlFor="file-upload" className="block font-medium mb-2">
-                            Upload Profile Picture
+            {/* Conditionally Render Profile Picture & Slider Section */}
+            {templatesWithPicture.includes(resumeData.selectedTemplate) && (
+                <section className="bg-white p-4 rounded-md shadow">
+                    <h2 className="text-xl font-semibold mb-4">Profile Picture</h2>
+                    <div className="flex items-center">
+                        <div className="w-full">
+                            <label htmlFor="file-upload" className="block font-medium mb-2">
+                                Upload Profile Picture
+                            </label>
+                            <input
+                                id="file-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                className="w-full"
+                            />
+                        </div>
+                        {previewUrl && (
+                            <div
+                                className="ml-4 relative"
+                                style={{ width: imageSize, height: imageSize }}
+                            >
+                                <Image
+                                    src={previewUrl}
+                                    alt="Profile Preview"
+                                    width={imageSize}
+                                    height={imageSize}
+                                    className="rounded-full"
+                                    unoptimized={true} // required for blob URLs
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className="mt-4">
+                        <label
+                            htmlFor="image-size-slider"
+                            className="block text-sm font-medium mb-1"
+                        >
+                            Image Size: {imageSize}px
                         </label>
                         <input
-                            id="file-upload"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
+                            id="image-size-slider"
+                            type="range"
+                            min="50"
+                            max="200"
+                            value={imageSize}
+                            onChange={handleSliderChange}
                             className="w-full"
                         />
                     </div>
-                    {previewUrl && (
-                        <div
-                            className="ml-4 relative"
-                            style={{ width: imageSize, height: imageSize }}
-                        >
-                            <Image
-                                src={previewUrl}
-                                alt="Profile Preview"
-                                width={imageSize}
-                                height={imageSize}
-                                className="rounded-full"
-                                unoptimized={true} // required for blob URLs
-                            />
-                        </div>
-                    )}
-                </div>
-                <div className="mt-4">
-                    <label
-                        htmlFor="image-size-slider"
-                        className="block text-sm font-medium mb-1"
-                    >
-                        Image Size: {imageSize}px
-                    </label>
-                    <input
-                        id="image-size-slider"
-                        type="range"
-                        min="50"
-                        max="200"
-                        value={imageSize}
-                        onChange={handleSliderChange}
-                        className="w-full"
-                    />
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* Template Selector Section */}
             <section className="bg-white p-4 rounded-md shadow">
