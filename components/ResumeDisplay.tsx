@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ResumeContext } from '../context/ResumeContext';
 import { ClassicTemplate, ModernTemplate, CustomTemplate } from './templates';
 import { PrinterIcon } from '@heroicons/react/24/solid';
@@ -10,6 +10,36 @@ import SidebarPanel from './SidebarPanel';
 
 const ResumeDisplay: React.FC = () => {
     const { resumeData } = useContext(ResumeContext);
+    const [isDesktop, setIsDesktop] = useState<boolean>(true);
+
+    // Determine if the device is considered a desktop.
+    useEffect(() => {
+        const checkIfDesktop = () => {
+            // You can adjust the breakpoint (here: 1024px) as needed.
+            setIsDesktop(window.innerWidth >= 1280);
+        };
+
+        checkIfDesktop();
+        window.addEventListener('resize', checkIfDesktop);
+        return () => window.removeEventListener('resize', checkIfDesktop);
+    }, []);
+
+    // If not on desktop, show a message indicating that the app is supported on desktops only.
+    if (!isDesktop) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+                <h1 className="text-3xl font-bold text-gray-800 mb-4 animate-pulse">
+                    Desktop Only
+                </h1>
+                <p className="text-lg text-gray-600 mb-2">
+                    This resume builder is supported on desktop devices only.
+                </p>
+                <p className="text-sm text-gray-500">
+                    Please switch to a desktop computer to access all features.
+                </p>
+            </div>
+        );
+    }
 
     const renderTemplate = () => {
         switch (resumeData.selectedTemplate) {
@@ -27,24 +57,22 @@ const ResumeDisplay: React.FC = () => {
     const handlePrint = () => {
         window.print();
     };
+
     return (
         <div className="grid grid-cols-4 gap-4">
             {/* Left Panel: Sidebar with selectors */}
-
-
             <div className="col-span-1">
                 <SidebarPanel />
             </div>
 
             {/* Right Panel: Resume Preview */}
-            {/* <div className="mx-auto p-4 col-span-3 flex justify-center"> */}
             <div className="col-span-3 place-self-center">
                 <div className="bg-gray-100 min-h-screen w-[calc(8.5in)] print:w-full print:m-0 grid">
                     {/* Print button */}
-                    <div className="flex justify-end mb-4 print:hidden ">
+                    <div className="flex justify-end mb-4 print:hidden">
                         <button
                             onClick={handlePrint}
-                            className="fixed bottom-8 mr-2  flex items-center bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
+                            className="fixed bottom-8 mr-2 flex items-center bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
                             aria-label="Print Resume"
                         >
                             <PrinterIcon className="h-5 w-5 mr-2" />
@@ -68,7 +96,6 @@ const ResumeDisplay: React.FC = () => {
                 </div>
             </div>
         </div>
-        // </div>
     );
 };
 
