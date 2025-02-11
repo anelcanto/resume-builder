@@ -93,12 +93,22 @@ const SidebarPanel: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
             {/* JSON Input Section */}
-            <div className="p-4">
-                <label htmlFor="json-input" className="text-2xl font-semibold mb-6 block">
-                    Paste JSON Job here
-                </label>
+            <section className="bg-white p-4 rounded-md shadow">
+                <h2 className="text-2xl font-semibold mb-4">Paste JSON Job</h2>
+
+                <div className="mb-4 text-center">
+                    <a
+                        href="https://chatgpt.com/g/g-67a3dfc519888191966a72e6d8e35b62-resume-builder-dwd"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline hover:text-blue-700"
+                    >
+                        Click here to obtain your JSON from a GPT
+                    </a>
+                </div>
+
                 <textarea
                     id="json-input"
                     name="json-input"
@@ -120,14 +130,14 @@ const SidebarPanel: React.FC = () => {
                         </div>
                     )}
                 </div>
-            </div>
+            </section>
 
-            {/* File Upload & Slider Section */}
-            <div className="p-4">
-                {/* Arrange file upload input and preview side by side */}
-                <div className="flex items-center mb-4">
-                    <div>
-                        <label htmlFor="file-upload" className="block text-lg font-semibold mb-2">
+            {/* Profile Picture & Slider Section */}
+            <section className="bg-white p-4 rounded-md shadow">
+                <h2 className="text-xl font-semibold mb-4">Profile Picture</h2>
+                <div className="flex items-center">
+                    <div className="w-full">
+                        <label htmlFor="file-upload" className="block font-medium mb-2">
                             Upload Profile Picture
                         </label>
                         <input
@@ -139,7 +149,10 @@ const SidebarPanel: React.FC = () => {
                         />
                     </div>
                     {previewUrl && (
-                        <div className="ml-4 relative" style={{ width: imageSize, height: imageSize }}>
+                        <div
+                            className="ml-4 relative"
+                            style={{ width: imageSize, height: imageSize }}
+                        >
                             <Image
                                 src={previewUrl}
                                 alt="Profile Preview"
@@ -151,10 +164,11 @@ const SidebarPanel: React.FC = () => {
                         </div>
                     )}
                 </div>
-
-                {/* Slider to adjust image size */}
-                <div>
-                    <label htmlFor="image-size-slider" className="block text-sm font-medium mb-1">
+                <div className="mt-4">
+                    <label
+                        htmlFor="image-size-slider"
+                        className="block text-sm font-medium mb-1"
+                    >
                         Image Size: {imageSize}px
                     </label>
                     <input
@@ -167,9 +181,12 @@ const SidebarPanel: React.FC = () => {
                         className="w-full"
                     />
                 </div>
-            </div>
+            </section>
 
-            <TemplateSelector />
+            {/* Template Selector Section */}
+            <section className="bg-white p-4 rounded-md shadow">
+                <TemplateSelector />
+            </section>
         </div>
     );
 };

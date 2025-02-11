@@ -9,11 +9,6 @@ import { ResumeContext } from '../context/ResumeContext';
 // Dynamically import react-select with SSR disabled.
 const DynamicSelect = dynamic(() => import('react-select'), { ssr: false });
 
-interface Option {
-    value: string;
-    label: string;
-}
-
 interface Template {
     id: string;
     name: string;
@@ -52,12 +47,13 @@ const TemplateSelector: React.FC = () => {
     return (
         <>
             <h2 className="text-2xl font-semibold mb-6">Select a Resume Template</h2>
-            <DynamicSelect<Option>
+            <DynamicSelect
                 options={templates.map((template) => ({
                     value: template.id,
                     label: template.name,
                 }))}
-                onChange={(option) => option && handleSelect(option.value)}
+                //eslint-disable-next-line
+                onChange={(newValue: any) => newValue && handleSelect(newValue.value)}
                 placeholder="Select a template"
             />
             {/* 
