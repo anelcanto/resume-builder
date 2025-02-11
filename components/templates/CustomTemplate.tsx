@@ -36,7 +36,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ data }) => {
                     )}
                 </div>
                 {data.candidate_image && (
-                    <div className="mr-16">
+                    <div className="mr-16 -mt-4">
                         <Image
                             src={data.candidate_image}
                             alt="Candidate Logo"
