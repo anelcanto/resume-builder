@@ -75,7 +75,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
             </ul>
             <p className="text-sm text-gray-600 mt-1 ml-5">
               <strong>Stack:</strong>{' '}
-              {job.stack.map((tech, idx) => (
+              {job?.stack?.map((tech, idx) => (
                 <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
                   {tech.technology}
                   {idx < job.stack.length - 1 && ', '}

@@ -66,7 +66,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ data }) => {
             </ul>
             <p className="text-sm text-gray-600 mt-2">
               <strong className='ml-5'>Stack:</strong>{' '}
-              {job.stack.map((tech, idx) => (
+              {job?.stack?.map((tech, idx) => (
                 <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
                   {tech.technology}
                   {idx < job.stack.length - 1 && ', '}

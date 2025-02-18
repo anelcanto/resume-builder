@@ -91,7 +91,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ data }) => {
                                 {job.stack && job.stack.length > 0 && (
                                     <p className=" text-[14px]">
                                         <strong className='ml-5'>Stack:</strong>{' '}
-                                        {job.stack.map((tech, idx) => (
+                                        {job?.stack?.map((tech, idx) => (
                                             <span key={idx} className={tech.is_relevant ? 'font-bold' : ''}>
                                                 {tech.technology}
                                                 {idx < job.stack.length - 1 && ', '}
