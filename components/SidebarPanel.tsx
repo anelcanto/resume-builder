@@ -36,7 +36,6 @@ const SidebarPanel: React.FC = () => {
             let jsonString = inputValue;
 
             // Check if the JSON is wrapped in markdown code fences.
-            // It should start with a line like "```json" and end with "```".
             const lines = jsonString.split('\n');
             if (
                 lines.length > 1 &&
@@ -51,7 +50,10 @@ const SidebarPanel: React.FC = () => {
 
             try {
                 const parsedData = JSON.parse(jsonString);
-                setResumeData(parsedData);
+                setResumeData((prevData) => ({
+                    ...prevData, // Keep previous settings
+                    ...parsedData, // Merge in new data
+                }));
                 setIsValid(true);
                 setError('');
             } catch {
