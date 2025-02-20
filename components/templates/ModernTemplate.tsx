@@ -1,4 +1,4 @@
-// components/templates/ModernTemplate.tsx
+"use client";
 
 import React from 'react';
 import SkillsTable, { Skill } from '../SkillsTable';
