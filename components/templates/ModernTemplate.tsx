@@ -19,7 +19,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
     typeof skill === 'string' ? { technology: skill, is_relevant: true } : (skill as Skill)
   );
   return (
-    <>
+    <div className="container mx-auto p-4">
       {/* // The container class here enforces a consistent max-width (if you have container sizes defined)
       // You can adjust the container’s max-width in your Tailwind config or add a specific max-w-* class. */}
       {/* Header Section */}
@@ -119,7 +119,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ data }) => {
           </ul>
         </div>
       </section >
-    </>
+    </div>
   );
 };
 
